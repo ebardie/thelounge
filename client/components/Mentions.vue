@@ -108,6 +108,7 @@
 import Username from "./Username.vue";
 import ParsedMessage from "./ParsedMessage.vue";
 import socket from "../js/socket";
+import eventbus from "../js/eventbus";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 
@@ -142,10 +143,10 @@ export default {
 		},
 	},
 	mounted() {
-		this.$root.$on("mentions:toggle", this.openPopup);
+		eventbus.on("mentions:toggle", this.openPopup);
 	},
 	destroyed() {
-		this.$root.$off("mentions:toggle", this.openPopup);
+		eventbus.off("mentions:toggle", this.openPopup);
 	},
 	methods: {
 		messageTime(time) {
